@@ -3,7 +3,7 @@
 
 ## Descrição do Projeto
 
-<p align="center">Este projeto é destinado a calcular a área de figuras geométricas, como triângulos e retângulos, através de uma API construída com Laravel.</p>
+<p align="center">Este projeto é destinado a ser um gerenciador/banco de senhas.</p>
 <br>
 
 ## Comandos importantes
