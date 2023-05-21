@@ -1,0 +1,42 @@
+<?php
+
+namespace App\Services;
+
+use App\Models\User;
+
+class UserService
+{
+    public function getAllUsers()
+    {
+        // Obter todos os usuários
+        return User::all();
+    }
+
+    public function createUser(array $data)
+    {
+        // Criar um novo usuário
+        return User::create($data);
+    }
+
+    public function getUserById($id)
+    {
+        // Obter um usuário específico pelo ID
+        return User::findOrFail($id);
+    }
+
+    public function updateUser($id, array $data)
+    {
+        // Atualizar um usuário específico pelo ID
+        $user = User::findOrFail($id);
+
+        $user->update($data);
+
+        return $user;
+    }
+
+    public function deleteUser($id)
+    {
+        // Excluir um usuário específico pelo ID
+        return User::findOrFail($id)->delete();
+    }
+}
