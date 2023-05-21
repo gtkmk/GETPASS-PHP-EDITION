@@ -19,6 +19,8 @@ Com o **Docker Desktop rodando**, vá até a pasta raiz do projeto e execute os 
 
 ***docker-compose up -d***
 
+***php artisan migrate***
+
 ***docker-compose exec app php artisan key:generate***
 
 Verifique se os três serviços estão rodando e, em seguida, rode as migrations com o seguinte comando:
