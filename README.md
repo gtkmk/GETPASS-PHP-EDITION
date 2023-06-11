@@ -15,11 +15,7 @@ __LEMBRE-SE DE CONFIGURAR O ARQUIVO .env. O ARQUIVO .env.example SEGUE COM AS IN
 <br>
 Para utilizar este projeto, siga os passos abaixo:
 <br>
-Com o 
-
-__Docker e o Docker Composer instalado e rodando__
-
-, vá até a pasta raiz do projeto e execute os seguintes comandos em ordem:
+Com o **Docker e o Docker Composer instalado e rodando** , vá até a pasta raiz do projeto e execute os seguintes comandos em ordem:
 
 ***docker-compose build***
 
