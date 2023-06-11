@@ -19,6 +19,8 @@ Com o **Docker Desktop rodando**, vá até a pasta raiz do projeto e execute os 
 
 ***docker-compose up -d***
 
+***composer install***
+
 ***php artisan install***
 
 ***php artisan migrate***
