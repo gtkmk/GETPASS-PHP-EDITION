@@ -72,4 +72,28 @@ class UsersController extends Controller
         // Retornar uma resposta de sucesso
         return response()->json(['message' => 'User deleted successfully']);
     }
+
+    public function authenticate(Request $request)
+    {
+        // Validar os dados de entrada
+        $this->validate($request, [
+            'email' => 'required|email',
+            'password' => 'required|string'
+        ]);
+    
+        $email = $request->input('email');
+        $password = $request->input('password');
+    
+        // Autenticar o usuário e obter o token de acesso
+        $accessToken = $this->userService->authenticateUser($email, $password);
+    
+        if ($accessToken) {
+            // Autenticação bem-sucedida, retornar o token de acesso como resposta
+            return response()->json(['access_token' => $accessToken]);
+        } else {
+            // Autenticação falhou, retornar uma resposta de erro
+            return response()->json(['message' => 'Authentication failed'], 401);
+        }
+    }
+
 }
