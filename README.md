@@ -9,7 +9,9 @@
 ## Comandos importantes
 
 <br>
-**LEMBRE-SE DE CONFIGURAR O ARQUIVO .env. O ARQUIVO .env.example SEGUE COM AS INFORMAÇÕES CORRETAS DE ACESSO DO BD PELO DOCKER**
+
+__LEMBRE-SE DE CONFIGURAR O ARQUIVO .env. O ARQUIVO .env.example SEGUE COM AS INFORMAÇÕES CORRETAS DE ACESSO DO BD PELO DOCKER__
+
 <br>
 Para utilizar este projeto, siga os passos abaixo:
 <br>
