@@ -7,7 +7,7 @@
 <br>
 <p align="center">Integrantes do grupo:</p>
 <p align="center"> 
-**Davi Augusto**
+__Davi Augusto__
 </p>
 <p align="center"> André Amorin </p>
 <p align="center"> Lucas Mendonça </p>
