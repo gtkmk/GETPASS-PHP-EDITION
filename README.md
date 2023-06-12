@@ -6,9 +6,7 @@
 <p align="center">Este projeto é destinado a ser um gerenciador/banco de senhas.</p>
 <br>
 <p align="center">Integrantes do grupo:</p>
-<p align="center"> 
-__Davi Augusto__
-</p>
+<p align="center"> Davi Augusto </p>
 <p align="center"> André Amorin </p>
 <p align="center"> Lucas Mendonça </p>
 <p align="center"> Diogo Estevão </p>
