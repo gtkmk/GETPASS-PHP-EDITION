@@ -8,7 +8,7 @@ class TabelaHistoric extends Migration
 {
     public function up()
     {
-        Schema::create('historic', function (Blueprint $table) {
+        Schema::create('historics', function (Blueprint $table) {
             $table->id();
             $table->string('old_username');
             $table->string('old_password');
@@ -23,6 +23,6 @@ class TabelaHistoric extends Migration
 
     public function down()
     {
-        Schema::dropIfExists('historic');
+        Schema::dropIfExists('historics');
     }
 }

@@ -9,31 +9,33 @@ class HistoricService
     public function getAllHistoric()
     {
         // Obter todo o histórico de senhas do usuário autenticado
-        return Historic::whereHas('credential', function ($query) {
-            $query->where('user_id', auth()->user()->id);
-        })->get();
+        return Historic::where('user_id', auth()->user()->id)->get();
     }
 
     public function createHistoric(array $data)
     {
         // Criar um novo registro de histórico
-        return Historic::create($data);
+        $historic = new Historic($data);
+        $historic->user_id = auth()->user()->id;
+        $historic->save();
+
+        return $historic;
     }
 
     public function getHistoricById($id)
     {
         // Obter um registro de histórico específico pelo ID do usuário autenticado
-        return Historic::whereHas('credential', function ($query) {
-            $query->where('user_id', auth()->user()->id);
-        })->findOrFail($id);
+        return Historic::where('user_id', auth()->user()->id)
+        ->findOrFail($id);
     }
 
     public function updateHistoric($id, array $data)
     {
+        $userId = auth()->user()->id;
         // Atualizar um registro de histórico específico pelo ID do usuário autenticado
-        $historic = Historic::whereHas('credential', function ($query) {
-            $query->where('user_id', auth()->user()->id);
-        })->findOrFail($id);
+        $historic = Historic::where('user_id', $userId)
+                                ->where('id', $id)
+                                ->firstOrFail();
 
         $historic->update($data);
 
@@ -43,8 +45,8 @@ class HistoricService
     public function deleteHistoric($id)
     {
         // Excluir um registro de histórico específico pelo ID do usuário autenticado
-        return Historic::whereHas('credential', function ($query) {
-            $query->where('user_id', auth()->user()->id);
-        })->findOrFail($id)->delete();
+        return Historic::where('user_id', auth()->user()->id)
+        ->findOrFail($id)
+        ->delete();
     }
 }

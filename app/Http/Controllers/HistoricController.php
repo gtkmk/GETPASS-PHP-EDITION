@@ -32,7 +32,7 @@ class HistoricController extends Controller
                 'old_username' => 'required|string',
                 'old_password' => 'required|string',
                 'change_date' => 'required|date',
-                'credentials_id' => 'required|exists:crendentials,id'
+                'crendentials_id' => 'required|integer'
             ]);
         } catch (ValidationException $e) {
             $errors = $e->errors();
@@ -66,7 +66,7 @@ class HistoricController extends Controller
             'old_username' => 'string',
             'old_password' => 'string',
             'change_date' => 'date',
-            'credentials_id' => 'exists:crendentials,id'
+            'crendentials_id' => 'exists:crendentials,id'
         ]);
 
         // Atualizar um registro de histórico existente
@@ -82,6 +82,6 @@ class HistoricController extends Controller
         $this->historicService->deleteHistoric($id);
 
         // Retornar uma resposta de sucesso
-        return response()->json(['message' => 'Historic deleted successfully']);
+        return response()->json(['message' => 'Histórico apagado com sucesso']);
     }
 }

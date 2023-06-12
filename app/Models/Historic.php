@@ -14,6 +14,7 @@ class Historic extends Model
         'old_username',
         'old_password',
         'change_date',
+        'user_id',
         'crendentials_id',
     ];
 
@@ -21,6 +22,10 @@ class Historic extends Model
         'old_username' => 'string',
         'old_password' => 'string',
         'change_date' => 'datetime',
+        'user_id' => 'int',
+        'crendentials_id' => 'int',
+        'created_at' => 'datetime',
+        'updated_at' => 'datetime',
     ];
 
     public function user()
