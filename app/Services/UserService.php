@@ -45,17 +45,17 @@ class UserService
         return User::findOrFail($id)->delete();
     }
 
-    public function authenticateUser($email, $password)
-    {
-        // Verificar se as credenciais são válidas
-        if (auth()->attempt(['email' => $email, 'password' => $password])) {
-            // Autenticação bem-sucedida, gerar o token de acesso
-            $accessToken = auth()->user()->createToken('authToken')->accessToken;
+    // public function authenticateUser($email, $password)
+    // {
+    //     // Verificar se as credenciais são válidas
+    //     if (auth()->attempt(['email' => $email, 'password' => $password])) {
+    //         // Autenticação bem-sucedida, gerar o token de acesso
+    //         $accessToken = auth()->user()->createToken('authToken')->accessToken;
     
-            return $accessToken;
-        }
+    //         return $accessToken;
+    //     }
     
-        // Autenticação falhou, retornar null
-        return null;
-    }
+    //     // Autenticação falhou, retornar null
+    //     return null;
+    // }
 }

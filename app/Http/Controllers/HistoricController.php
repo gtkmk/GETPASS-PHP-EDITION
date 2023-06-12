@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Services\HistoricService;
 use Illuminate\Http\Request;
+use Illuminate\Validation\ValidationException;
 
 class HistoricController extends Controller
 {
@@ -25,17 +26,26 @@ class HistoricController extends Controller
 
     public function store(Request $request)
     {
-        // Validar os dados de entrada
-        $this->validate($request, [
-            'old_username' => 'required|string',
-            'old_password' => 'required|string',
-            'change_date' => 'required|date',
-            'credentials_id' => 'required|exists:crendentials,id'
-        ]);
-
+        try {
+            // Validar os dados de entrada
+            $this->validate($request, [
+                'old_username' => 'required|string',
+                'old_password' => 'required|string',
+                'change_date' => 'required|date',
+                'credentials_id' => 'required|exists:crendentials,id'
+            ]);
+        } catch (ValidationException $e) {
+            $errors = $e->errors();
+            // Aqui você pode personalizar a resposta quando um campo estiver inválido
+            return response()->json(['message' => 'Um ou mais campos estão inválidos.', 'errors' => $errors], 422);
+        }
+    
+        $data = $request->all();
+        $data['user_id'] = auth()->user()->id;
+    
         // Criar um novo registro de histórico
-        $historic = $this->historicService->createHistoric($request->all());
-
+        $historic = $this->historicService->createHistoric($data);
+    
         // Retornar uma resposta, exibindo o novo registro de histórico criado
         return response()->json($historic, 201);
     }

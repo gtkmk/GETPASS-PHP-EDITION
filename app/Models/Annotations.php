@@ -8,8 +8,6 @@ use Illuminate\Database\Eloquent\Model;
 
 class Annotations extends Model
 {
-    use SoftDeletes;
-
     use HasFactory;
 
     protected $table = 'annotations';
@@ -17,10 +15,19 @@ class Annotations extends Model
     protected $fillable = [
         'title',
         'content',
+        'user_id'
     ];
 
     protected $casts = [
         'title' => 'string',
-        'content' => 'string'
+        'content' => 'string',
+        'user_id' => 'int',
+        'created_at' => 'datetime',
+        'updated_at' => 'datetime',
     ];
+
+    public function user()
+    {
+        return $this->belongsTo(Users::class);
+    }
 }

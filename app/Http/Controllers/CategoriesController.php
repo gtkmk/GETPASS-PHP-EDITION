@@ -30,8 +30,11 @@ class CategoriesController extends Controller
             'name' => 'required|string'
         ]);
 
+        $data = $request->all();
+        $data['user_id'] = auth()->user()->id;
+
         // Criar uma nova categoria
-        $category = $this->categoriesService->createCategory($request->all());
+        $category = $this->categoriesService->createCategory($data);
 
         // Retornar uma resposta, exibindo a nova categoria criada
         return response()->json($category, 201);
@@ -53,8 +56,11 @@ class CategoriesController extends Controller
             'name' => 'string'
         ]);
 
+        $data = $request->all();
+        $data['user_id'] = auth()->user()->id;
+
         // Atualizar uma categoria existente
-        $category = $this->categoriesService->updateCategory($id, $request->all());
+        $category = $this->categoriesService->updateCategory($id, $data);
 
         // Retornar uma resposta, exibindo a categoria atualizada
         return response()->json($category);
@@ -66,6 +72,6 @@ class CategoriesController extends Controller
         $this->categoriesService->deleteCategory($id);
 
         // Retornar uma resposta de sucesso
-        return response()->json(['message' => 'Category deleted successfully']);
+        return response()->json(['message' => 'Categoria deletada com sucesso']);
     }
 }

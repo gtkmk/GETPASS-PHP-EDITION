@@ -8,8 +8,6 @@ use Illuminate\Database\Eloquent\Model;
 
 class Historic extends Model
 {
-    use SoftDeletes;
-
     use HasFactory;
 
     protected $fillable = [

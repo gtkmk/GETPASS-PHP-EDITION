@@ -8,10 +8,9 @@ class AnnotationService
 {
     public function getAllAnnotations()
     {
-        // Obter todas as anotações do usuário autenticado
-        return Annotations::whereHas('category', function ($query) {
-            $query->where('user_id', auth()->user()->id);
-        })->get();
+        $userId = auth()->user()->id;
+        // Retornar as anotações encontradas
+        return Annotations::where('user_id', $userId)->get();
     }
 
     public function createAnnotation(array $data)
@@ -22,29 +21,34 @@ class AnnotationService
 
     public function getAnnotationById($id)
     {
+        $userId = auth()->user()->id;
         // Obter uma anotação específica pelo ID do usuário autenticado
-        return Annotations::whereHas('category', function ($query) {
-            $query->where('user_id', auth()->user()->id);
-        })->findOrFail($id);
+        return Annotations::where('user_id', $userId)
+        ->where('id', $id)->get();
+
     }
 
     public function updateAnnotation($id, array $data)
     {
-        // Atualizar uma anotação específica pelo ID do usuário autenticado
-        $annotation = Annotations::whereHas('category', function ($query) {
-            $query->where('user_id', auth()->user()->id);
-        })->findOrFail($id);
-
+        $userId = auth()->user()->id;    
+        // Obter a anotação com base no ID do usuário e ID da anotação
+        $annotation = Annotations::where('user_id', $userId)
+                                ->where('id', $id)
+                                ->firstOrFail();
+    
+        // Atualizar os dados da anotação
         $annotation->update($data);
-
+    
         return $annotation;
     }
 
     public function deleteAnnotation($id)
     {
+        $userId = auth()->user()->id;
         // Excluir uma anotação específica pelo ID do usuário autenticado
-        return Annotations::whereHas('category', function ($query) {
-            $query->where('user_id', auth()->user()->id);
-        })->findOrFail($id)->delete();
+        $annotation = Annotations::where('user_id', $userId)
+        ->where('id', $id);
+
+        $annotation->delete();
     }
 }

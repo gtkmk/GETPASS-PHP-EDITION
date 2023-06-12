@@ -8,8 +8,6 @@ use Illuminate\Database\Eloquent\Model;
 
 class Credentials extends Model
 {
-    use SoftDeletes;
-
     use HasFactory;
 
     protected $table = 'crendentials';

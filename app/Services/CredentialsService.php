@@ -31,14 +31,18 @@ class CredentialsService
 
     public function updateCredential($id, array $data)
     {
+        $userId = auth()->user()->id;
         // Atualizar uma credencial específica pelo ID do usuário autenticado
-        $credential = Credentials::where('user_id', auth()->user()->id)
-            ->findOrFail($id);
-
+        $credential = Credentials::where('user_id', $userId)
+                                ->where('id', $id)
+                                ->firstOrFail();
+    
+        // Atualizar os dados da credencial
         $credential->update($data);
 
         return $credential;
     }
+    
 
     public function deleteCredential($id)
     {

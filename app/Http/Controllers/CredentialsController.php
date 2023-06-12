@@ -32,8 +32,11 @@ class CredentialsController extends Controller
             'category_id' => 'required|integer'
         ]);
 
+        $data = $request->all();
+        $data['user_id'] = auth()->user()->id;
+
         // Criar uma nova credencial
-        $credential = $this->credentialsService->createCredential($request->all());
+        $credential = $this->credentialsService->createCredential($data);
 
         // Retornar uma resposta, exibindo a nova credencial criada
         return response()->json($credential, 201);
@@ -57,8 +60,11 @@ class CredentialsController extends Controller
             'category_id' => 'integer'
         ]);
 
+        $data = $request->all();
+        $data['user_id'] = auth()->user()->id;
+
         // Atualizar uma credencial existente
-        $credential = $this->credentialsService->updateCredential($id, $request->all());
+        $credential = $this->credentialsService->updateCredential($id, $data);
 
         // Retornar uma resposta, exibindo a credencial atualizada
         return response()->json($credential);
@@ -70,6 +76,6 @@ class CredentialsController extends Controller
         $this->credentialsService->deleteCredential($id);
 
         // Retornar uma resposta de sucesso
-        return response()->json(['message' => 'Credential deleted successfully']);
+        return response()->json(['message' => 'Credencial deletada com sucesso']);
     }
 }

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Services\UserService;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class UsersController extends Controller
 {
@@ -73,27 +74,28 @@ class UsersController extends Controller
         return response()->json(['message' => 'User deleted successfully']);
     }
 
-    public function authenticate(Request $request)
-    {
-        // Validar os dados de entrada
-        $this->validate($request, [
-            'email' => 'required|email',
-            'password' => 'required|string'
-        ]);
+    // public function authenticate(Request $request)
+    // {
+    //     // Validar os dados de entrada
+    //     $this->validate($request, [
+    //         'email' => 'required|email',
+    //         'password' => 'required|string'
+    //     ]);
     
-        $email = $request->input('email');
-        $password = $request->input('password');
+    //     $email = $request->input('email');
+    //     $password = $request->input('password');
     
-        // Autenticar o usuário e obter o token de acesso
-        $accessToken = $this->userService->authenticateUser($email, $password);
+    //     // Autenticar o usuário e obter o token de acesso
+    //     if(Auth::attempt(['email' => $request->email, 'password' => $request->password])){
+    //         $user = Auth::user();
+    //         $token = $user->createToken('JWT');
     
-        if ($accessToken) {
-            // Autenticação bem-sucedida, retornar o token de acesso como resposta
-            return response()->json(['access_token' => $accessToken]);
-        } else {
-            // Autenticação falhou, retornar uma resposta de erro
-            return response()->json(['message' => 'Authentication failed'], 401);
-        }
-    }
+    //         // Autenticação bem-sucedida, retornar o token de acesso como resposta
+    //         return response()->json(['access_token' => $token]);
+    //     }
+    
+    //     // Autenticação falhou, retornar uma resposta de erro
+    //     return response()->json(['message' => 'Usuário inválido'], 401);
+    // }
 
 }

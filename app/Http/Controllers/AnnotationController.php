@@ -31,8 +31,12 @@ class AnnotationController extends Controller
             'content' => 'required|string'
         ]);
 
+        // Complementar o array $data com o valor "user_id"
+        $data = $request->all();
+        $data['user_id'] = auth()->user()->id;
+
         // Criar uma nova anotação
-        $annotation = $this->annotationService->createAnnotation($request->all());
+        $annotation = $this->annotationService->createAnnotation($data);
 
         // Retornar uma resposta, exibindo a nova anotação criada
         return response()->json($annotation, 201);
@@ -55,8 +59,11 @@ class AnnotationController extends Controller
             'content' => 'string'
         ]);
 
+        $data = $request->all();
+        $data['user_id'] = auth()->user()->id;
+
         // Atualizar uma anotação existente
-        $annotation = $this->annotationService->updateAnnotation($id, $request->all());
+        $annotation = $this->annotationService->updateAnnotation($id, $data);
 
         // Retornar uma resposta, exibindo a anotação atualizada
         return response()->json($annotation);
@@ -68,6 +75,6 @@ class AnnotationController extends Controller
         $this->annotationService->deleteAnnotation($id);
 
         // Retornar uma resposta de sucesso
-        return response()->json(['message' => 'Annotation deleted successfully']);
+        return response()->json(['message' => 'Anotação deletada com sucesso']);
     }
 }
